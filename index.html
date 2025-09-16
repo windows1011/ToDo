@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To Do App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My To Do App</h1>
+            <button id="settingsBtn" class="settings-btn" title="Settings">⚙️</button>
+        </header>
+        
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-content">
+                <div class="settings-header">
+                    <h2>⚙️ Settings</h2>
+                    <button id="closeSettingsBtn" class="close-btn">&times;</button>
+                </div>
+                <div class="settings-body">
+                    <div class="form-section">
+                        <h3>🤖 AI Enhancement (Optional)</h3>
+                        <p class="section-description">
+                            <strong>🎉 Your app works great without AI!</strong><br>
+                            Configure AI settings for enhanced features, or leave blank to use smart rule-based alternatives.
+                        </p>
+                        
+                        <div class="form-group">
+                            <label for="aiEndpoint">Azure AI Endpoint (Optional):</label>
+                            <input type="url" id="aiEndpoint" placeholder="https://your-model.example.openai.azure.com">
+                            <small>Your Azure AI Foundry model endpoint URL</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="aiApiKey">API Key (Optional):</label>
+                            <input type="password" id="aiApiKey" placeholder="Enter your API key">
+                            <small>Your Azure AI Foundry API key - stored securely in browser only</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="aiModel">Model Name (Optional):</label>
+                            <input type="text" id="aiModel" placeholder="gpt-4o" value="gpt-4o">
+                            <small>The model deployment name (e.g., gpt-4o, gpt-35-turbo)</small>
+                        </div>
+                        
+                        <div class="connection-status" id="connectionStatus"></div>
+                        
+                        <div class="form-actions">
+                            <button id="testConnectionBtn" type="button">🧪 Test AI Connection</button>
+                            <button id="saveSettingsBtn" type="button">💾 Save Settings</button>
+                            <button id="clearAIBtn" type="button" class="secondary">🗑️ Clear AI Settings</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Calendar Integration Section -->
+                    <div class="form-section">
+                        <h3>📅 Calendar Integration</h3>
+                        <p class="section-description">
+                            Connect your calendar for smarter task prioritization based on your schedule and workload.
+                        </p>
+                        
+                        <div class="permission-status">
+                            <div class="permission-item">
+                                <span class="permission-label">📅 Calendar Access:</span>
+                                <span class="permission-status-badge" id="calendarStatus">Not Connected</span>
+                                <button id="connectCalendarBtn" class="permission-btn">Connect</button>
+                            </div>
+                            <div class="permission-item">
+                                <span class="permission-label">👥 Teams Access:</span>
+                                <span class="permission-status-badge" id="teamsStatus">Not Connected</span>
+                                <button id="connectTeamsBtn" class="permission-btn">Connect</button>
+                            </div>
+                        </div>
+                        
+                        <div class="privacy-notice">
+                            <strong>🔒 Privacy Notice:</strong>
+                            <p>We only access your calendar metadata (meeting titles, times) to understand your workload. 
+                            No meeting content or personal information is stored or shared.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button id="testConnectionBtn" class="test-btn">
+                            <span class="btn-text">Test Connection</span>
+                            <span class="btn-spinner" style="display: none;">🔄</span>
+                        </button>
+                        <button id="saveSettingsBtn" class="save-btn">Save Settings</button>
+                    </div>
+                    <div id="connectionStatus" class="connection-status"></div>
+                </div>
+            </div>
+        </div>
+        
+        <main>
+            <div class="input-section">
+                <div class="input-group">
+                    <input type="text" id="taskInput" placeholder="Add a new task..." maxlength="200">
+                    <div class="task-options">
+                        <select id="taskPriority" class="priority-select">
+                            <option value="none">No Priority</option>
+                            <option value="low">🟢 Low</option>
+                            <option value="medium">🟡 Medium</option>
+                            <option value="high">🔴 High</option>
+                        </select>
+                        <button type="button" id="suggest-priority" class="suggest-btn" title="Get AI-powered priority suggestion">
+                            🤖 Smart
+                        </button>
+                        <input type="date" id="taskDueDate" class="due-date-input">
+                    </div>
+                </div>
+                <button id="addTaskBtn" type="button">
+                    <span class="btn-icon">✨</span>
+                    <span class="btn-text">Add Task</span>
+                </button>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Tasks</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="high">High Priority</button>
+                </div>
+                <div class="sort-options">
+                    <select id="sortBy" class="sort-select">
+                        <option value="created">Sort by: Created</option>
+                        <option value="priority">Sort by: Priority</option>
+                        <option value="dueDate">Sort by: Due Date</option>
+                        <option value="alphabetical">Sort by: A-Z</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="task-list-container">
+                <ul id="taskList" class="task-list">
+                    <!-- Tasks will be dynamically added here -->
+                </ul>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
