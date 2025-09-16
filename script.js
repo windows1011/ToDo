@@ -36,7 +36,14 @@ class TodoApp {
         });
 
         // Settings events
-        settingsBtn.addEventListener('click', () => this.showSettings());
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => {
+                console.log('Settings button clicked!');
+                this.showSettings();
+            });
+        } else {
+            console.error('Settings button not found!');
+        }
         closeSettingsBtn.addEventListener('click', () => this.hideSettings());
         saveSettingsBtn.addEventListener('click', () => this.saveAISettings());
         testConnectionBtn.addEventListener('click', () => this.testAIConnection());
